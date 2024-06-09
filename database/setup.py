@@ -21,7 +21,6 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS articles (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
-            content TEXT NOT NULL,
             author_id INTEGER,
             magazine_id INTEGER,
             FOREIGN KEY (author_id) REFERENCES authors (id),
@@ -31,3 +30,6 @@ def create_tables():
 
     conn.commit()
     conn.close()
+
+if __name__ == '__main__':
+    create_tables()

@@ -1,4 +1,6 @@
 from database.connection import get_db_connection
+from models.author import Author
+from models.magazine import Magazine
 
 class Article:
     def __init__(self, author, magazine, title, id=None):
@@ -45,7 +47,7 @@ class Article:
         cursor.execute('SELECT id, title, author_id, magazine_id FROM articles')
         articles = cursor.fetchall()
         conn.close()
-        return [cls(author.get_by_id(article[2]), magazine.get_by_id(article[3]), article[1], article[0]) for article in articles]
+        return [cls(Author.get_by_id(article[2]), Magazine.get_by_id(article[3]), article[1], article[0]) for article in articles]
 
     @staticmethod
     def get_by_id(article_id):
@@ -54,7 +56,7 @@ class Article:
         cursor.execute('SELECT id, title, author_id, magazine_id FROM articles WHERE id = ?', (article_id,))
         article = cursor.fetchone()
         conn.close()
-        return Article(author.get_by_id(article[2]), magazine.get_by_id(article[3]), article[1], article[0]) if article else None
+        return Article(Author.get_by_id(article[2]), Magazine.get_by_id(article[3]), article[1], article[0]) if article else None
     
     @staticmethod
     def delete_articles_by_author(author_id):

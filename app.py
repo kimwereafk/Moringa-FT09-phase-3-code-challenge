@@ -2,6 +2,7 @@ from models.author import Author
 from models.magazine import Magazine
 from models.article import Article
 from database.setup import create_tables
+from database.connection import get_db_connection
 
 def main():
     # Initialize the database and create tables
